@@ -1,0 +1,27 @@
+.wrap{
+    display: flex;
+    height: 50px;
+    background-color: bisque;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    padding: 0 5px;
+    margin: 15px 0;
+    
+    & .task-info{
+        display: flex;
+        align-items: center;
+        flex: 4;
+        & input{
+            margin: 0 5px;
+        }
+    }
+    & .task-option{
+        flex: 1;
+        display: flex;
+        justify-content: space-around;
+        & span{
+            cursor: pointer;
+        }
+    }
+}

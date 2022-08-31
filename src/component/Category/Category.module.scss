@@ -1,0 +1,52 @@
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wrap{
+    background-color: aliceblue;
+    width: 350px;
+    height: 650px;
+    padding: 25px 15px;
+    border-radius: 20px;
+    & .remove-cate{
+        cursor: pointer;
+        display: flex;
+        flex-direction: row-reverse;
+        font-size: 30px;
+    }
+    & .category{
+        height: 95%;
+        & .category-name{
+            height: 50px;
+            @include flex-center();
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        & .category-createDay{
+            height: 100px;
+            font-size: 1.5rem;
+            @include flex-center();
+            & input{
+                height: 40px;
+                width: 85%;
+                border-radius: 30px 0 0 30px;
+                padding-left: 20px;
+                font-size: 1rem;
+            }
+            & button{
+                height: 40px;
+                border-radius: 0 30px 30px 0;
+                &:hover{
+                    background-color:aquamarine;
+                }
+            }
+        }
+        & .category-task{
+            height: 450px;
+            overflow: auto;
+        }
+    }
+}
+
+

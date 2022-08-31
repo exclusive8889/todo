@@ -12,13 +12,10 @@ function SignIn(props) {
         axios.post('http://task-manager.api.mvn-training.com/auth/login', user)
         .then((response) => {
           if(response.request.status==200) props.setLogin(true)
-          return response
-          }
-        )
-        .then(result=>{
           localStorage.setItem("accessToken",result.data.token)
           localStorage.setItem("id",result.data.id)
-        })  
+          }
+        )
       }
     return ( 
         <form className="Auth-form" onSubmit={handleSubmitLogin} >

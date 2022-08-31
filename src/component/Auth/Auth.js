@@ -1,37 +1,45 @@
 import React, { useState,useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+
 import './Auth.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from "axios"
+
+import { useDispatch } from "react-redux/es/exports"
+import { loginUser } from "../../utils/apiRequest"
+
 export default function Login(props) {
   let [authMode, setAuthMode] = useState("signin")
   const [usename,setusername] = useState("")
   const [password,setPassword] = useState("")
-  const [login,setLogin] =useState(()=>{
-    axios.get(`https://www.task-manager.api.mvn-training.com/api/users/${localStorage.getItem("id")}`, {
-        headers: {
-          'Authorization': `Bearer  ${localStorage.getItem("accessToken")}` 
-        }
-      })
-      .then((response)=> {
-        // console.log('1')
-        if(response.request.status==200){
-          // console.log(response)
-          setLogin(true)
-        } 
-        else{
-          return false;
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  } )
-  console.log(login)
+  const navigate = useNavigate();
+  const dispatch=useDispatch()
+  // const [login,setLogin] =useState(()=>{
+  //   axios.get(`https://www.task-manager.api.mvn-training.com/api/users/${localStorage.getItem("id")}`, {
+  //       headers: {
+  //         'Authorization': `Bearer  ${localStorage.getItem("accessToken")}` 
+  //       }
+  //     })
+  //     .then((response)=> {
+  //       // console.log('1')
+  //       if(response.request.status==200){
+  //         // console.log(response)
+  //         setLogin(true)
+  //       } 
+  //       else{
+  //         return false;
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // } )
+  // console.log(login)
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
   
-  if (!login){
+  // if (!login){
     if (authMode === "signin") {
       const handleSubmitLogin=(e)=>{
         e.preventDefault()
@@ -39,17 +47,7 @@ export default function Login(props) {
           username:usename,
           password:password,
         }
-        axios.post('https://www.task-manager.api.mvn-training.com/auth/login', user)
-        .then((response) => {
-          // console.log(response)
-          if(response.request.status==200) setLogin(true)
-          return response
-          }
-        )
-        .then(result=>{
-          localStorage.setItem("accessToken",result.data.token)
-          localStorage.setItem("id",result.data.id)
-        })  
+        loginUser(user,dispatch,navigate)
       }
       return (
         <div className="Auth-form-container">
@@ -144,10 +142,10 @@ export default function Login(props) {
         </form>
       </div>
     )
-  }
-  else if(login){
-    return (
-      <h1>sc</h1>
-    )
-  }
+  // }
+  // else if(login){
+  //   return (
+  //     <h1>sc</h1>
+  //   )
+  // }
 }
