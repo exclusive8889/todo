@@ -4,16 +4,17 @@ import { ApiClient } from '../../request/request';
 import styles from'./Task.module.scss'
 import classNames from 'classnames/bind';
 const cx=classNames.bind(styles)
-function Task({data}) {
+function Task({title}) {
+    console.log(title)
     const handleRemoveTask=()=>{
-        console.log()
-        ApiClient.delete(`/api/tasks/${data.id}`,)
+        // console.log()
+        // ApiClient.delete(`/api/tasks/${data.id}`,)
     }
     return ( 
         <div className={cx('wrap')}>
             <div className={cx('task-info')}>
                 <input type='checkbox'/>
-                <p>{data}</p>
+                <p>{title}</p>
             </div>
             <div className={cx('task-option')}>
                 <span><FontAwesomeIcon icon={faPen}/></span>

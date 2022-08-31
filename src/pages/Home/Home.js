@@ -14,6 +14,7 @@ const cx = classNames.bind(styles);
 function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [datacate, setDatacate] = useState([]);
+  
   // console.log(currentPage)
   const totalPage = 2;
   const itemperpage = 3;
@@ -59,7 +60,9 @@ function Home() {
         <div className={cx("wrap-categories")}>
         {
           datacate.map((item,index) => (
-            <Category data={item} key={index}/>
+            <Category data={item} key={index}>
+              
+            </Category>
           ))
         }
         </div>
