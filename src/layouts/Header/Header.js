@@ -32,7 +32,7 @@ function Header() {
             <option value="audi">Audi</option>
           </select>
           <input
-            placeholder="Search"
+            placeholder="Search task"
             className={cx("search-input", "search--height")}
           ></input>
           <button className={cx("search-btn", "search--height")}>
