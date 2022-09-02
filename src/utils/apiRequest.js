@@ -1,7 +1,6 @@
-import axios from "axios";
-import { ApiClient } from "../request/request";
 
-import {loginStart,loginFailed,loginSuccess } from "../stores/slice/authSlide";
+import { ApiClient } from "../request/request";
+import { loginFailed,loginStart,loginSuccess } from "../stores/slice/authSlice";
 export const loginUser=async(user,dispatch,navigate)=>{
     dispatch(loginStart());
     try{

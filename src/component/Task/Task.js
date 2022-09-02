@@ -6,15 +6,10 @@ import classNames from "classnames/bind";
 import { useState } from "react";
 const cx = classNames.bind(styles);
 function Task({ title, idcate, removeTask, status, completed, idtask,updateTask }) {
-  // const [complete,setComplete]=useState(false)
-  // console.log(complete)
   return (
     <div
       className={cx("wrap")}
       style={{ textDecoration: status != "IN_PROGRESS" ? "line-through" : "" }}
-      // onClick={()=>{
-      //     console.log('idtask',idtask)
-      // }}
     >
       <div className={cx("task-info")}>
         <input
@@ -28,6 +23,8 @@ function Task({ title, idcate, removeTask, status, completed, idtask,updateTask 
             }
           }}
         ></input>
+
+        
         <p
           className={cx("task-info")}
         >

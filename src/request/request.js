@@ -9,13 +9,6 @@ const requestHandler = (config) => {
   config.headers = {
     Authorization: `Bearer ${atk}`,
   };
-  if (config.method === "get") {
-    config.params = {
-      ...config.params,
-      // version: Date.now(),
-    };
-  }
-
   return config;
 };
 axiosInstance.interceptors.request.use(requestHandler, (err) =>

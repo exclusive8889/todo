@@ -36,7 +36,7 @@ function Home() {
   for (let i = 1; i <= totalPage; i++) {
     pages.push(i);
   }
-  const listItems = pages.map((page) => (
+  const listPages = pages.map((page) => (
     <li
       key={page}
       className={cx("page-item")}
@@ -49,22 +49,14 @@ function Home() {
       </a>
     </li>
   ));
-
-  //list item
-  
-  
   return (
     <>
       <Header />
       <div className={cx("container")}>
         <div className={cx("wrap-categories")}>
-        {
-          datacate.map((item,index) => (
-            <Category data={item} key={index}>
-              
-            </Category>
-          ))
-        }
+          {datacate.map((item, index) => (
+            <Category data={item} key={index}></Category>
+          ))}
         </div>
       </div>
       <div className={cx("pagi")}>
@@ -82,7 +74,7 @@ function Home() {
               </button>
             </li>
           )}
-          {listItems}
+          {listPages}
           {currentPage < totalPage && (
             <li className={cx("page-next")}>
               <button
