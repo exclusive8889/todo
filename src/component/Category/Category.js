@@ -5,35 +5,46 @@ import classNames from "classnames/bind";
 import Task from "../Task/Task";
 import { ApiClient } from "../../request/request";
 import { faL, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask } from "../../stores/slice/taskSlice";
+import { taskSelector } from "../../stores/selector";
 import { useState, useEffect } from "react";
+import { getTasks } from "../../stores/slice/taskSlice";
 const cx = classNames.bind(styles);
 
 function Category({ data, children }) {
   const [tasknname, setTaskname] = useState("");
-  const [tasks, setTasks] = useState([]);
+  // const [tasks, setTasks] = useState([]);
   const [render, setRender] = useState(false);
   const [btnupdate, setBtnupdate] = useState(false);
   const [getidtask, setGetidtask] = useState("");
   const [updateCate, setUpdatecate] = useState(false);
   const [textCate, setTextcate] = useState(data.name);
-  useEffect(() => {
-    ApiClient.get("/api/tasks")
-      .then((res) => {
-        setTasks(res.data.items);
+  const dispatch = useDispatch();
+  const [catesss,setcate]=useState()
+ 
+  const [dataa,setDataa]=useState()
+  const tasks = useSelector(taskSelector);
+  
+  useEffect(()=>{
+    tasks && setDataa(tasks)
+  },[tasks])
+  // console.log(tasks)
+  
+  const handleAddtask = async() => {
+    const dis=
+    await dispatch(
+       addTask({
+        title: tasknname,
+        categoryIds: [data.id]
       })
-      .catch((err) => console.log(err));
-  }, [render]);
-  const handleAddtask = async () => {
-    await ApiClient.post("/api/tasks", {
-      title: tasknname,
-      categoryIds: [data.id],
-    })
-    .then((res)=>{
-      console.log(res)
-    });
+    )
+    console.log(dis)
     setTaskname("");
-    setRender(!render);
   };
+  const handleChangeInput = (e) => {
+    setTaskname(e.target.value)
+  }
   const removeTask = async (idtask) => {
     await ApiClient.delete(`/api/tasks/${idtask}`);
     setRender(!render);
@@ -63,9 +74,8 @@ function Category({ data, children }) {
     setBtnupdate(!btnupdate);
   };
   return (
-    <div
-      className={cx("wrap")}
-    >
+    
+    <div className={cx("wrap")}>
       <div className={cx("remove-cate")}>
         <FontAwesomeIcon icon={faXmark} />
       </div>
@@ -73,9 +83,7 @@ function Category({ data, children }) {
         <div className={cx("category-createDay")}>
           <input
             placeholder="add task"
-            onChange={(e) => {
-              setTaskname(e.target.value);
-            }}
+            onChange={handleChangeInput}
             value={tasknname}
           ></input>
           {!btnupdate ? (
@@ -123,7 +131,8 @@ function Category({ data, children }) {
           )}
         </div>
         <div className={cx("category-task")}>
-          {tasks.map((task) =>
+          {
+          tasks?.map((task) =>
             task.categories.map(
               (idcate, index) =>
                 idcate.id == data.id && (
@@ -139,7 +148,8 @@ function Category({ data, children }) {
                   />
                 )
             )
-          )}
+          )
+          }
         </div>
       </div>
     </div>

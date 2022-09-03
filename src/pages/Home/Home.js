@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { ApiClient } from "../../request/request";
-
+import { useSelector } from "react-redux";
 import styles from "./Home.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
@@ -14,8 +14,13 @@ const cx = classNames.bind(styles);
 function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [datacate, setDatacate] = useState([]);
-  
-  // console.log(currentPage)
+
+  // const catesss=useSelector((state)=>state.categories.items)
+  // const liite=catesss.map((cate)=>{
+  //   return cate.items
+  // })
+  // console.log(liite)
+
   const totalPage = 2;
   const itemperpage = 3;
   useEffect(() => {
